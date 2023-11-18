@@ -1,5 +1,6 @@
 import { MessageItem } from '@/features/chat/types'
 import { usePushProtocolUser } from '@/hooks/usePushProtocolUser'
+import { shortenAddress } from '@/utils/common'
 import { CONSTANTS, Message, MessageEvent, MessageEventType } from '@pushprotocol/restapi'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -27,7 +28,7 @@ export const usePushProtocolChat = (chatId: string) => {
             console.log(data)
             if (data.event === ('chat.message' as MessageEventType)) {
               const [_, address] = data.from.split(':')
-              const shortAddress = `${address.slice(0, 5)}...${address.slice(-5)}`
+              const shortAddress = shortenAddress(address)
               setMessages((prev) => [
                 ...prev,
                 {
