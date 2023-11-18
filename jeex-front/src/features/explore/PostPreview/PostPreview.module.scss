@@ -20,7 +20,7 @@
 .footer {
   display: grid;
   grid-template-columns: 1fr auto;
-  grid-template-areas: "info info" "user likes";
+  grid-template-areas: 'info info' 'user user';
   align-items: center;
   gap: var(--space-base);
   margin: var(--space-tiny) 0 0;
@@ -32,11 +32,6 @@
 
 .user {
   grid-area: user;
-}
-
-.likes {
-  grid-area: likes;
-  color: var(--color-text-secondary);
 }
 
 .title {

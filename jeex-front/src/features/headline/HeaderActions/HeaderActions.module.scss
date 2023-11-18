@@ -1,7 +1,9 @@
-@import "@/styles/_mixins.module";
+@import '@/styles/_mixins.module';
 
 .actions {
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-base);
 }
 
 .button {
@@ -12,19 +14,6 @@
 
   &:hover {
     background: var(--color-background-hover);
-  }
-}
-
-.upload {
-  @include device(miniMobile) {
-    display: none;
-  }
-}
-
-.uploadText {
-  display: none;
-  @include device(notMobile) {
-    display: block;
   }
 }
 

@@ -1,57 +1,67 @@
-"use client";
-import { FC } from "react";
-import cn from "classnames";
-import { MeetingAuthor } from "@/features/meeting/MeetingAuthor/MeetingAuthor";
-import { MeetingControl } from "@/features/meeting/MeetingControl/MeetingControl";
-import styles from "./MeetingBar.module.scss";
+'use client'
+import { FC, useCallback, useEffect } from 'react'
+import cn from 'classnames'
+
+import { useDisconnectButton, useRoomContext } from '@livekit/components-react'
+
+import { MeetingAuthor } from '@/features/meeting/MeetingAuthor/MeetingAuthor'
+import { MeetingControl } from '@/features/meeting/MeetingControl/MeetingControl'
+import styles from './MeetingBar.module.scss'
 
 type MeetingBarProps = {
-  isVisible: boolean;
-  isMicOn?: boolean;
-  isCameraOn?: boolean;
-  isSubscribed?: boolean;
-  followers?: number;
-  toggleMic: (muteState: boolean) => void;
-  toggleCamera: (muteState: boolean) => void;
-  onSubscribe?: () => void;
-  onClose: () => void;
-};
+  isVisible: boolean
+  isMicOn?: boolean
+  isCamOn?: boolean
+  toggleMic: (muteState: boolean) => void
+  toggleCam: (muteState: boolean) => void
+  onClose: () => void
+}
 
 export const MeetingBar: FC<MeetingBarProps> = ({
   isVisible,
   isMicOn,
-  isCameraOn,
-  isSubscribed,
-  followers,
+  isCamOn,
   toggleMic,
-  toggleCamera,
-  onSubscribe,
+  toggleCam,
   onClose,
 }) => {
+  const { buttonProps } = useDisconnectButton({ stopTracks: true })
+  const room = useRoomContext()
+
+  useEffect(() => {
+    if (room.state !== 'connected') return
+    room.localParticipant.setMicrophoneEnabled(!!isMicOn)
+  }, [isCamOn, room])
+
+  useEffect(() => {
+    if (room.state !== 'connected') return
+    room.localParticipant.setCameraEnabled(!!isCamOn)
+  }, [isCamOn, room])
+
+  const handleDisconnect = useCallback(() => {
+    buttonProps.onClick()
+    console.log('first')
+    onClose()
+  }, [])
+
   return (
     <div className={cn(styles.bar, { [styles.visible]: isVisible })}>
       <div className={styles.author}>
-        <MeetingAuthor
-          name="ChuckNorris"
-          photoUrl="/images/avatar.png"
-          isSubscribed={isSubscribed}
-          followers={followers}
-          onSubscribe={onSubscribe}
-        />
+        <MeetingAuthor name="ChuckNorris" photoUrl="/images/avatar.png" />
       </div>
       <div className={styles.controls}>
         {/* <MeetingControl icon="cameraRotate" onClick={() => {}} /> */}
-        {isCameraOn ? (
+        {isCamOn ? (
           <MeetingControl
             text="Turn off camera"
             icon="videoCamera"
-            onClick={() => toggleCamera(true)}
+            onClick={() => toggleCam(true)}
           />
         ) : (
           <MeetingControl
             text="Turn on camera"
             icon="videoCameraSlash"
-            onClick={() => toggleCamera(false)}
+            onClick={() => toggleCam(false)}
           />
         )}
         {isMicOn ? (
@@ -71,9 +81,10 @@ export const MeetingBar: FC<MeetingBarProps> = ({
           text="Leave the meeting"
           icon="phone"
           color="red"
-          onClick={onClose}
+          // disabled={buttonProps.disabled}
+          onClick={handleDisconnect}
         />
       </div>
     </div>
-  );
-};
+  )
+}
