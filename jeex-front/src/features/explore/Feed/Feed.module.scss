@@ -1,9 +1,8 @@
 .feed {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  row-gap: var(--space-big);
-  column-gap: var(--space-base);
-  padding: var(--space-big) 0;
+  gap: var(--space-base);
+  padding: var(--space-base) 0;
 
   @media (min-width: 964px) {
     grid-template-columns: repeat(3, 1fr);
