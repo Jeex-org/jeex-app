@@ -1,12 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Room } from "livekit-client";
+import { Room, Track } from "livekit-client";
 import { useParams } from "next/navigation";
-import { LiveKitRoom, RoomAudioRenderer } from "@livekit/components-react";
 import { RoomOnline } from "@/features/rooms/RoomOnline/RoomOnline";
 import { Article } from "@/components/Article/Article";
 import { environments } from "@/features/livekit/constants";
+import { MeetingLayout } from "@/features/meeting/MeetingLayout/MeetingLayout";
 
 export default function RoomOnlinePage() {
   const { room: roomName } = useParams();
@@ -42,6 +42,10 @@ export default function RoomOnlinePage() {
     })();
   }, [connectToRoom, roomName]);
 
+  const handleClose = useCallback(() => {
+    console.log("NAVIGATE");
+  }, []);
+
   if (token === "") {
     return <div>Getting token...</div>;
   }
@@ -50,19 +54,13 @@ export default function RoomOnlinePage() {
     <Article title={`Room ${roomName}`} backUrl="/rooms">
       <div>Room online: {roomOnline?.name}</div>
       {roomOnline && (
-        <LiveKitRoom
-          room={roomOnline}
-          token={token}
-          serverUrl={wsUrl}
-          connect
-          // connectOptions={{ autoSubscribe: true }}
-          // onConnected={fixSafariSoundOutput}
-          // onDisconnected={handleDisconnect}
-          // onError={handleError}
-        >
-          {roomOnline && <RoomOnline />}
-          <RoomAudioRenderer muted={!isDefaultDevicesSet} />
-        </LiveKitRoom>
+        <MeetingLayout
+          participants={[]}
+          messages={[]}
+          followers={385}
+          likes={42}
+          onClose={handleClose}
+        ></MeetingLayout>
       )}
     </Article>
   );

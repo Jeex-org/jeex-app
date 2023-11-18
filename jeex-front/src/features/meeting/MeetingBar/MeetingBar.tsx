@@ -1,6 +1,9 @@
 "use client";
-import { FC } from "react";
+import { FC, useCallback, useEffect } from "react";
 import cn from "classnames";
+
+import { useDisconnectButton, useRoomContext } from "@livekit/components-react";
+
 import { MeetingAuthor } from "@/features/meeting/MeetingAuthor/MeetingAuthor";
 import { MeetingControl } from "@/features/meeting/MeetingControl/MeetingControl";
 import styles from "./MeetingBar.module.scss";
@@ -8,11 +11,11 @@ import styles from "./MeetingBar.module.scss";
 type MeetingBarProps = {
   isVisible: boolean;
   isMicOn?: boolean;
-  isCameraOn?: boolean;
+  isCamOn?: boolean;
   isSubscribed?: boolean;
   followers?: number;
   toggleMic: (muteState: boolean) => void;
-  toggleCamera: (muteState: boolean) => void;
+  toggleCam: (muteState: boolean) => void;
   onSubscribe?: () => void;
   onClose: () => void;
 };
@@ -20,14 +23,32 @@ type MeetingBarProps = {
 export const MeetingBar: FC<MeetingBarProps> = ({
   isVisible,
   isMicOn,
-  isCameraOn,
+  isCamOn,
   isSubscribed,
   followers,
   toggleMic,
-  toggleCamera,
+  toggleCam,
   onSubscribe,
   onClose,
 }) => {
+  const { buttonProps } = useDisconnectButton({ stopTracks: true });
+  const room = useRoomContext();
+
+  useEffect(() => {
+    if (room.state !== "connected") return;
+    room.localParticipant.setMicrophoneEnabled(!!isMicOn);
+  }, [isCamOn, room]);
+
+  useEffect(() => {
+    if (room.state !== "connected") return;
+    room.localParticipant.setCameraEnabled(!!isCamOn);
+  }, [isCamOn, room]);
+
+  const handleDisconnect = useCallback(async () => {
+    await buttonProps.onClick();
+    onClose();
+  }, []);
+
   return (
     <div className={cn(styles.bar, { [styles.visible]: isVisible })}>
       <div className={styles.author}>
@@ -41,17 +62,17 @@ export const MeetingBar: FC<MeetingBarProps> = ({
       </div>
       <div className={styles.controls}>
         {/* <MeetingControl icon="cameraRotate" onClick={() => {}} /> */}
-        {isCameraOn ? (
+        {isCamOn ? (
           <MeetingControl
             text="Turn off camera"
             icon="videoCamera"
-            onClick={() => toggleCamera(true)}
+            onClick={() => toggleCam(true)}
           />
         ) : (
           <MeetingControl
             text="Turn on camera"
             icon="videoCameraSlash"
-            onClick={() => toggleCamera(false)}
+            onClick={() => toggleCam(false)}
           />
         )}
         {isMicOn ? (
@@ -71,7 +92,8 @@ export const MeetingBar: FC<MeetingBarProps> = ({
           text="Leave the meeting"
           icon="phone"
           color="red"
-          onClick={onClose}
+          disabled={buttonProps.disabled}
+          onClick={handleDisconnect}
         />
       </div>
     </div>
