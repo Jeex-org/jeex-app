@@ -1,11 +1,9 @@
 'use client'
 import { FC, useMemo } from 'react'
-import { Avatar, Button } from '@radix-ui/themes'
-import { Envelope } from '@phosphor-icons/react'
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { UserMenuItem } from '../types'
-import styles from './HeaderUser.module.scss'
 import { usePrivy } from '@privy-io/react-auth'
+import { Avatar, Button } from '@radix-ui/themes'
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import styles from './HeaderUser.module.scss'
 
 type HeaderUserProps = {
   className?: string

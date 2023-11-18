@@ -17,19 +17,6 @@
   }
 }
 
-.upload {
-  @include device(miniMobile) {
-    display: none;
-  }
-}
-
-.uploadText {
-  display: none;
-  @include device(notMobile) {
-    display: block;
-  }
-}
-
 .badge {
   position: absolute;
   top: 0;
