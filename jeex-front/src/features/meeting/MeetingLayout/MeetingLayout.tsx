@@ -11,11 +11,9 @@ import { Person } from '@/components/User/User'
 import styles from './MeetingLayout.module.scss'
 import { usePushProtocolChat } from '@/hooks/usePushProtocolChat'
 
-type MeetingLayoutProps = {
-  participants: Person[]
-}
+type MeetingLayoutProps = {}
 
-export const MeetingLayout: FC<MeetingLayoutProps> = ({ participants }) => {
+export const MeetingLayout: FC<MeetingLayoutProps> = () => {
   const router = useRouter()
   const [isBarVisible, setIsBarVisible] = useState(true)
   const [isMicOn, setIsMicOn] = useState(true)
@@ -55,7 +53,7 @@ export const MeetingLayout: FC<MeetingLayoutProps> = ({ participants }) => {
         <MeetingChat
           messages={messages}
           isOpen={isChatOpen}
-          hasParticipants={participants.length > 1}
+          hasParticipants={[].length > 1}
           onClose={() => setIsChatOpen(false)}
         />
         <MeetingActions
@@ -65,7 +63,7 @@ export const MeetingLayout: FC<MeetingLayoutProps> = ({ participants }) => {
           onToggleChat={() => setIsChatOpen(!isChatOpen)}
         />
       </div>
-      {participants.length > 1 && <MeetingParticipants participants={participants} />}
+      {[].length > 1 && <MeetingParticipants participants={[]} />}
     </div>
   )
 }

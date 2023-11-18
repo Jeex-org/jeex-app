@@ -1,12 +1,12 @@
-"use client";
-import { FC } from "react";
-import Link from "next/link";
-import { Room } from "livekit-server-sdk";
-import { useQuery } from "@tanstack/react-query";
-import { Article } from "@/components/Article/Article";
-import { Loader } from "@/components/Loader/Loader";
+'use client'
+import { FC } from 'react'
+import Link from 'next/link'
+import { Room } from 'livekit-server-sdk'
+import { useQuery } from '@tanstack/react-query'
+import { Article } from '@/components/Article/Article'
+import { Loader } from '@/components/Loader/Loader'
 
-type RoomsListLoaderProps = {};
+type RoomsListLoaderProps = {}
 
 export const RoomsListLoader: FC<RoomsListLoaderProps> = () => {
   const {
@@ -14,17 +14,12 @@ export const RoomsListLoader: FC<RoomsListLoaderProps> = () => {
     error: roomsError,
     data: rooms,
   } = useQuery({
-    queryKey: ["activeRoomsList"],
-    queryFn: () =>
-      fetch("/livekit/api/get-rooms-list").then((res) => res.json()),
-  });
+    queryKey: ['activeRoomsList'],
+    queryFn: () => fetch('/livekit/api/get-rooms-list').then((res) => res.json()),
+  })
 
   return (
-    <Article
-      title="Rooms page"
-      buttonUrl="/rooms/create"
-      buttonText="Create new room"
-    >
+    <Article title="Rooms page" buttonUrl="/rooms/create" buttonText="Create new room" isProtected>
       {isListLoading && <Loader title="Loading..." />}
       {roomsError ? (
         <div>Something went wrong :(</div>
@@ -40,5 +35,5 @@ export const RoomsListLoader: FC<RoomsListLoaderProps> = () => {
         !isListLoading && <p>No rooms found</p>
       )}
     </Article>
-  );
-};
+  )
+}

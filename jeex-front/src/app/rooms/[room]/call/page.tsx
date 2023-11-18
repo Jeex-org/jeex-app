@@ -10,7 +10,7 @@ export default function RoomOnlinePage() {
 
   return (
     <Article title={`Room ${roomName}`} backUrl="/rooms">
-      <MeetingLayout participants={[]}></MeetingLayout>
+      <MeetingLayout />
     </Article>
   )
 }
