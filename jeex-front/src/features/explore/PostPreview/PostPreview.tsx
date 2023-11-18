@@ -1,8 +1,8 @@
 'use client'
 import { FC } from 'react'
 import Link from 'next/link'
-import { AspectRatio } from '@radix-ui/themes'
 import { UserCircle } from '@phosphor-icons/react'
+import { PostMedia } from '@/features/explore/PostMedia/PostMedia'
 import styles from './PostPreview.module.scss'
 
 type PostPreviewProps = {
@@ -22,10 +22,7 @@ export const PostPreview: FC<PostPreviewProps> = ({
 }) => {
   return (
     <Link href={url} className={styles.post}>
-      <AspectRatio ratio={8 / 4} className={styles.media}>
-        <img src={cover} alt="" className={styles.cover} />
-        {isOnline && <div className={styles.online} />}
-      </AspectRatio>
+      <PostMedia cover={cover} isOnline={isOnline} />
       <footer className={styles.footer}>
         <div className={styles.info}>
           <h4 className={styles.title}>{title}</h4>

@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import { Room } from 'livekit-client'
 import { Article } from '@/components/Article/Article'
 import { environments } from '@/features/livekit/constants'
+import { PostMedia } from '@/features/explore/PostMedia/PostMedia'
 import { RoomConnector } from '@/features/rooms/RoomConnector/RoomConnector'
 import { Loader } from '@/components/Loader/Loader'
 
@@ -46,7 +47,7 @@ export const RoomLoader: FC<RoomLoaderProps> = () => {
   // TODO: Change return with real data
   return (
     <Article title={`Room ${roomName}`} backUrl="/rooms" isProtected>
-      <div>Room online: {roomOnline?.name}</div>
+      <PostMedia isOnline={true} />
       <Link href={`./${roomOnline?.name}/call`}>Call</Link>{' '}
       <Link href={`./${roomOnline?.name}/edit`}>Edit</Link>
     </Article>
