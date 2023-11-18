@@ -21,7 +21,7 @@ export const MeetingLiveKit: FC<PropsWithChildren<MeetingLiveKitProps>> = ({ chi
       video={true}
       audio={true}
       token={
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6IlRlc3Qgcm9vb20ifSwiaWF0IjoxNzAwMzEwNTc3LCJuYmYiOjE3MDAzMTA1NzcsImV4cCI6MTcwMDMzMjE3NywiaXNzIjoiQVBJRUZyWXUyaHFKckFEIiwic3ViIjoidGVzdCIsImp0aSI6InRlc3QifQ.GAmqI9JF4ls6r8vqDzkKHPGiJ_9J7HafdVw-DANuOVg'
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6IjEyMzQifSwiaWF0IjoxNzAwMzM4NDU0LCJuYmYiOjE3MDAzMzg0NTQsImV4cCI6MTcwMDM2MDA1NCwiaXNzIjoiQVBJRUZyWXUyaHFKckFEIiwic3ViIjoiNCIsImp0aSI6IjQifQ.UauLMy4bSvVm2lf3woeyaeRcwZ8CgAA3rZaFn7g-hVQ'
       }
       connectOptions={{ autoSubscribe: false }}
       serverUrl={'wss://meet-cbgsn7fz.livekit.cloud'}
