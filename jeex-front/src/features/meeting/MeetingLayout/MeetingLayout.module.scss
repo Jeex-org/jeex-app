@@ -1,4 +1,4 @@
-@import "@/styles/_mixins.module";
+@import '@/styles/_mixins.module';
 
 .meeting {
   --meeting-participant-size: 80px;
@@ -14,7 +14,7 @@
     position: relative;
     inset: unset;
     height: 800px;
-    max-height: calc(100vh - var(--panel-size));
+    max-height: 100vh;
   }
 }
 

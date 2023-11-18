@@ -37,7 +37,7 @@ export const MeetingActions: FC<MeetingActionsProps> = ({ isChatOpen, chatId }) 
       className={cn(styles.actions, { [styles.focused]: true }, { [styles.inFrame]: isChatOpen })}
     >
       <div className={styles.comments}>
-        <div className={styles.newComment} style={{ display: 'flex', alignItems: 'center' }}>
+        <div className={styles.newComment}>
           <textarea
             value={message}
             onChange={messageChangeHandler}
