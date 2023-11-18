@@ -1,16 +1,15 @@
-"use client";
-import { FC } from "react";
-import { AspectRatio } from "@radix-ui/themes";
-import { Person, User } from "@/components/User/User";
-import { PlayStat } from "@/components/PlayStat/PlayStat";
-import { Like } from "@/components/Like/Like";
-import styles from "./PostPreview.module.scss";
+'use client'
+import { FC } from 'react'
+import { AspectRatio } from '@radix-ui/themes'
+import { Person, User } from '@/components/User/User'
+import { PlayStat } from '@/components/PlayStat/PlayStat'
+import styles from './PostPreview.module.scss'
 
 type PostPreviewProps = {
-  title: string;
-  tags: string[];
-  user: Person; // TODO: Create own type for tags
-};
+  title: string
+  tags: string[]
+  user: Person // TODO: Create own type for tags
+}
 
 export const PostPreview: FC<PostPreviewProps> = ({ title, tags, user }) => {
   return (
@@ -34,16 +33,9 @@ export const PostPreview: FC<PostPreviewProps> = ({ title, tags, user }) => {
           </ul>
         </div>
         <div className={styles.user}>
-          <User
-            nickName={user.nickName}
-            photoUrl={user.photoUrl}
-            to={`/user/${user.nickName}`}
-          />
-        </div>
-        <div className={styles.likes}>
-          <Like count={2356} />
+          <User nickName={user.nickName} photoUrl={user.photoUrl} to={`/user/${user.nickName}`} />
         </div>
       </footer>
     </article>
-  );
-};
+  )
+}
