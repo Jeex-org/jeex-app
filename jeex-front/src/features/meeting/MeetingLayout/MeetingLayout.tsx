@@ -10,12 +10,16 @@ import { MessageItem } from '@/features/chat/types'
 import { Person } from '@/components/User/User'
 import styles from './MeetingLayout.module.scss'
 
-type MeetingLayoutProps = {
-  participants: Person[]
-  messages: MessageItem[]
-}
+// TODO: remove this mocks
+import chat from '@/mocks/chat.json'
+import participantsList from '@/mocks/participants.json'
 
-export const MeetingLayout: FC<MeetingLayoutProps> = ({ participants, messages }) => {
+type MeetingLayoutProps = {}
+
+export const MeetingLayout: FC<MeetingLayoutProps> = () => {
+  const messages = chat as MessageItem[]
+  const participants = participantsList as Person[]
+
   const router = useRouter()
   const [isBarVisible, setIsBarVisible] = useState(true)
   const [isMicOn, setIsMicOn] = useState(true)
