@@ -1,4 +1,4 @@
-@import "@/styles/_mixins.module";
+@import '@/styles/_mixins.module';
 
 .actions {
   display: flex;
@@ -33,22 +33,10 @@
 
 .newComment {
   flex: 1;
-
-  .focused & {
-    position: absolute;
-    inset-inline: var(--space-small);
-
-    @include device(desktop) {
-      position: relative;
-      inset-inline: unset;
-    }
-  }
 }
 
 .allComments {
-  .focused & {
-    visibility: hidden;
-  }
+  visibility: hidden;
 
   @include device(desktop) {
     display: none;
@@ -79,10 +67,7 @@
   justify-content: space-between;
   gap: var(--space-big);
   margin-inline-end: var(--space-small);
-
-  .focused & {
-    visibility: hidden;
-  }
+  visibility: hidden;
 
   @include device(desktop) {
     display: none;

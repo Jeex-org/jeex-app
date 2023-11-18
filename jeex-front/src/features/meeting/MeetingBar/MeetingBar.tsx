@@ -1,64 +1,52 @@
-"use client";
-import { FC, useCallback, useEffect } from "react";
-import cn from "classnames";
+'use client'
+import { FC, useCallback, useEffect } from 'react'
+import cn from 'classnames'
 
-import { useDisconnectButton, useRoomContext } from "@livekit/components-react";
+import { useDisconnectButton, useRoomContext } from '@livekit/components-react'
 
-import { MeetingAuthor } from "@/features/meeting/MeetingAuthor/MeetingAuthor";
-import { MeetingControl } from "@/features/meeting/MeetingControl/MeetingControl";
-import styles from "./MeetingBar.module.scss";
+import { MeetingAuthor } from '@/features/meeting/MeetingAuthor/MeetingAuthor'
+import { MeetingControl } from '@/features/meeting/MeetingControl/MeetingControl'
+import styles from './MeetingBar.module.scss'
 
 type MeetingBarProps = {
-  isVisible: boolean;
-  isMicOn?: boolean;
-  isCamOn?: boolean;
-  isSubscribed?: boolean;
-  followers?: number;
-  toggleMic: (muteState: boolean) => void;
-  toggleCam: (muteState: boolean) => void;
-  onSubscribe?: () => void;
-  onClose: () => void;
-};
+  isVisible: boolean
+  isMicOn?: boolean
+  isCamOn?: boolean
+  toggleMic: (muteState: boolean) => void
+  toggleCam: (muteState: boolean) => void
+  onClose: () => void
+}
 
 export const MeetingBar: FC<MeetingBarProps> = ({
   isVisible,
   isMicOn,
   isCamOn,
-  isSubscribed,
-  followers,
   toggleMic,
   toggleCam,
-  onSubscribe,
   onClose,
 }) => {
-  const { buttonProps } = useDisconnectButton({ stopTracks: true });
-  const room = useRoomContext();
+  const { buttonProps } = useDisconnectButton({ stopTracks: true })
+  const room = useRoomContext()
 
   useEffect(() => {
-    if (room.state !== "connected") return;
-    room.localParticipant.setMicrophoneEnabled(!!isMicOn);
-  }, [isCamOn, room]);
+    if (room.state !== 'connected') return
+    room.localParticipant.setMicrophoneEnabled(!!isMicOn)
+  }, [isCamOn, room])
 
   useEffect(() => {
-    if (room.state !== "connected") return;
-    room.localParticipant.setCameraEnabled(!!isCamOn);
-  }, [isCamOn, room]);
+    if (room.state !== 'connected') return
+    room.localParticipant.setCameraEnabled(!!isCamOn)
+  }, [isCamOn, room])
 
   const handleDisconnect = useCallback(async () => {
-    await buttonProps.onClick();
-    onClose();
-  }, []);
+    await buttonProps.onClick()
+    onClose()
+  }, [])
 
   return (
     <div className={cn(styles.bar, { [styles.visible]: isVisible })}>
       <div className={styles.author}>
-        <MeetingAuthor
-          name="ChuckNorris"
-          photoUrl="/images/avatar.png"
-          isSubscribed={isSubscribed}
-          followers={followers}
-          onSubscribe={onSubscribe}
-        />
+        <MeetingAuthor name="ChuckNorris" photoUrl="/images/avatar.png" />
       </div>
       <div className={styles.controls}>
         {/* <MeetingControl icon="cameraRotate" onClick={() => {}} /> */}
@@ -97,5 +85,5 @@ export const MeetingBar: FC<MeetingBarProps> = ({
         />
       </div>
     </div>
-  );
-};
+  )
+}

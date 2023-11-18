@@ -8,7 +8,7 @@
 
 .header {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   gap: var(--space-small);
   margin-block-end: var(--space-big);
 }
