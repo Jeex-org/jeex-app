@@ -3,6 +3,7 @@ import { FC, useEffect, useMemo } from 'react'
 import { usePrivy } from '@privy-io/react-auth'
 import { Avatar, Button } from '@radix-ui/themes'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import { buildAvatar } from '@/utils/common'
 import styles from './HeaderUser.module.scss'
 
 type HeaderUserProps = {
@@ -27,12 +28,7 @@ export const HeaderUser: FC<HeaderUserProps> = ({ className }) => {
       ) : (
         <>
           <DropdownMenu.Trigger asChild>
-            <Avatar
-              size="3"
-              src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?&w=256&h=256&q=70&crop=focalpoint&fp-x=0.5&fp-y=0.3&fp-z=1&fit=crop"
-              fallback="AT"
-              radius="full"
-            />
+            <Avatar size="3" src={buildAvatar(user?.wallet?.address)} fallback="AT" radius="none" />
           </DropdownMenu.Trigger>
           <DropdownMenu.Portal>
             <DropdownMenu.Content className={styles.DropdownMenuContent} sideOffset={5}>

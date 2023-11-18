@@ -1,9 +1,11 @@
 'use client'
 import { FC, useCallback, useEffect } from 'react'
 import cn from 'classnames'
+import { usePrivy } from '@privy-io/react-auth'
 
 import { useDisconnectButton, useRoomContext } from '@livekit/components-react'
 
+import { buildAvatar, shortenAddress } from '@/utils/common'
 import { MeetingAuthor } from '@/features/meeting/MeetingAuthor/MeetingAuthor'
 import { MeetingControl } from '@/features/meeting/MeetingControl/MeetingControl'
 import styles from './MeetingBar.module.scss'
@@ -25,6 +27,7 @@ export const MeetingBar: FC<MeetingBarProps> = ({
   toggleCam,
   onClose,
 }) => {
+  const { user } = usePrivy()
   const { buttonProps } = useDisconnectButton({ stopTracks: true })
   const room = useRoomContext()
 
@@ -47,7 +50,10 @@ export const MeetingBar: FC<MeetingBarProps> = ({
   return (
     <div className={cn(styles.bar, { [styles.visible]: isVisible })}>
       <div className={styles.author}>
-        <MeetingAuthor name="ChuckNorris" photoUrl="/images/avatar.png" />
+        <MeetingAuthor
+          name={shortenAddress(user?.wallet?.address)}
+          photoUrl={buildAvatar(user?.wallet?.address)}
+        />
       </div>
       <div className={styles.controls}>
         {/* <MeetingControl icon="cameraRotate" onClick={() => {}} /> */}
