@@ -1,7 +1,9 @@
-@import "@/styles/_mixins.module";
+@import '@/styles/_mixins.module';
 
 .actions {
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-base);
 }
 
 .button {

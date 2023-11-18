@@ -14,24 +14,6 @@ type HeaderUserProps = {
 export const HeaderUser: FC<HeaderUserProps> = ({ className }) => {
   const { user, connectWallet, login, logout } = usePrivy()
 
-  const menu: UserMenuItem[] = [
-    {
-      text: 'View profile',
-      slug: '#profile',
-      icon: <Envelope />,
-    },
-    {
-      text: 'Favorites',
-      slug: '#favorites',
-      icon: <Envelope />,
-    },
-    {
-      text: 'Settings',
-      slug: '#settings',
-      icon: <Envelope />,
-    },
-  ]
-
   const isLoggedIn = useMemo(() => user?.wallet?.address, [user?.wallet?.address])
 
   return (
@@ -52,15 +34,6 @@ export const HeaderUser: FC<HeaderUserProps> = ({ className }) => {
           </DropdownMenu.Trigger>
           <DropdownMenu.Portal>
             <DropdownMenu.Content className={styles.DropdownMenuContent} sideOffset={5}>
-              {menu.map((item) => (
-                <DropdownMenu.Item className={styles.DropdownMenuItem} key={item.slug}>
-                  {item.text}
-                  {item.rightSlot && <div className={styles.RightSlot}>{item.rightSlot}</div>}
-                </DropdownMenu.Item>
-              ))}
-
-              <DropdownMenu.Separator className={styles.DropdownMenuSeparator} />
-
               <DropdownMenu.Item onClick={logout} className={styles.DropdownMenuItem}>
                 Log out <div className={styles.RightSlot}>⌘+E</div>
               </DropdownMenu.Item>
