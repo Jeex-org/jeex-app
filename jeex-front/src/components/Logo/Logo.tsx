@@ -1,19 +1,19 @@
-import { FC } from "react";
-import Link from "next/link";
-import cn from "classnames";
-import { Righteous } from "next/font/google";
-import styles from "./Logo.module.scss";
+import { FC } from 'react'
+import Link from 'next/link'
+import cn from 'classnames'
+import { Righteous } from 'next/font/google'
+import styles from './Logo.module.scss'
 
-const righteous = Righteous({ weight: "400", subsets: ["latin"] });
+const righteous = Righteous({ weight: '400', subsets: ['latin'] })
 
 type LogoProps = {
-  className?: string;
-};
+  className?: string
+}
 
 export const Logo: FC<LogoProps> = ({ className }) => {
   return (
     <Link href="/" className={cn(styles.logo, righteous.className, className)}>
-      Jeex
+      <img src="/images/jeex-logo.png" className={styles.img} alt="Jeex" />
     </Link>
-  );
-};
+  )
+}
