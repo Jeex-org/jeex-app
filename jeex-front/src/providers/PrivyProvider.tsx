@@ -4,13 +4,13 @@ import { PrivyProvider as LPrivyProvider } from '@privy-io/react-auth'
 export const PrivyProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <LPrivyProvider
-      appId="clou7wxo3001rl40fe3hhsnwk"
+      appId="clp4cfxix05acl00f5slgrf2f"
       config={{
         loginMethods: ['email', 'wallet'],
         appearance: {
           theme: 'light',
           accentColor: '#676FFF',
-          logo: 'https://your-logo-url',
+          logo: '/images/jeex-logo.png',
         },
       }}
     >

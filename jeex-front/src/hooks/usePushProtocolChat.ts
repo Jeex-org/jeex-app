@@ -1,10 +1,11 @@
+import { MessageItem } from '@/features/chat/types'
 import { usePushProtocolUser } from '@/hooks/usePushProtocolUser'
-import { CONSTANTS } from '@pushprotocol/restapi'
+import { CONSTANTS, Message, MessageEvent, MessageEventType } from '@pushprotocol/restapi'
 import { useEffect, useMemo, useState } from 'react'
 
 export const usePushProtocolChat = (chatId: string) => {
   const { user } = usePushProtocolUser()
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState<MessageItem[]>([])
 
   useEffect(() => {
     console.log(user)
@@ -21,14 +22,30 @@ export const usePushProtocolChat = (chatId: string) => {
           raw: false, // enable true to show all data
         })
         .then((stream) => {
-          console.log('CONNECTED TO ROOM')
           // Listen for chat events
-          stream.on(CONSTANTS.STREAM.CHAT, (data: any) => {
+          stream.on(CONSTANTS.STREAM.CHAT, (data: MessageEvent) => {
             console.log(data)
+            if (data.event === ('chat.message' as MessageEventType)) {
+              const [_, address] = data.from.split(':')
+              const shortAddress = `${address.slice(0, 5)}...${address.slice(-5)}`
+              setMessages((prev) => [
+                ...prev,
+                {
+                  nickname: shortAddress,
+                  photoUrl: '',
+                  id: `${data.from}:${data.timestamp}`,
+                  text: data.message.content,
+                },
+              ])
+            }
           })
 
           stream.on(CONSTANTS.STREAM.CHAT_OPS, (data: any) => {
             console.log(data)
+          })
+
+          stream.on(CONSTANTS.STREAM.CONNECT, (data) => {
+            console.log('Connect data:', data)
           })
 
           // Connect stream, Important to setup up listen first
@@ -37,5 +54,5 @@ export const usePushProtocolChat = (chatId: string) => {
     }
   }, [user])
 
-  return useMemo(() => messages, [])
+  return useMemo(() => messages, [messages])
 }

@@ -1,5 +1,5 @@
 'use client'
-import { FC, useMemo } from 'react'
+import { FC, useEffect, useMemo } from 'react'
 import { usePrivy } from '@privy-io/react-auth'
 import { Avatar, Button } from '@radix-ui/themes'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
@@ -10,10 +10,14 @@ type HeaderUserProps = {
 }
 
 export const HeaderUser: FC<HeaderUserProps> = ({ className }) => {
-  const { user, connectWallet, login, logout } = usePrivy()
+  const { user, connectWallet, login, logout, getAccessToken } = usePrivy()
 
   const isLoggedIn = useMemo(() => user?.wallet?.address, [user?.wallet?.address])
-
+  useEffect(() => {
+    if (user?.wallet) {
+      getAccessToken().then((res) => console.log(res))
+    }
+  }, [user])
   return (
     <DropdownMenu.Root>
       {!isLoggedIn ? (

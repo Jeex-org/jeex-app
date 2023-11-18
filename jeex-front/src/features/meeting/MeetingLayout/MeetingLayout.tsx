@@ -9,13 +9,13 @@ import { MeetingLiveKit } from '../MeetingLiveKit/MeetingLiveKit'
 import { MessageItem } from '@/features/chat/types'
 import { Person } from '@/components/User/User'
 import styles from './MeetingLayout.module.scss'
+import { usePushProtocolChat } from '@/hooks/usePushProtocolChat'
 
 type MeetingLayoutProps = {
   participants: Person[]
-  messages: MessageItem[]
 }
 
-export const MeetingLayout: FC<MeetingLayoutProps> = ({ participants, messages }) => {
+export const MeetingLayout: FC<MeetingLayoutProps> = ({ participants }) => {
   const router = useRouter()
   const [isBarVisible, setIsBarVisible] = useState(true)
   const [isMicOn, setIsMicOn] = useState(true)
@@ -33,6 +33,10 @@ export const MeetingLayout: FC<MeetingLayoutProps> = ({ participants, messages }
   const handleClose = useCallback(() => {
     router.push('.')
   }, [])
+
+  const messages = usePushProtocolChat(
+    'fef148cf5ac64a9139ae48cd884f7ce09ca84ae5bc0347d5587815607f2e9ce5',
+  )
 
   return (
     <div className={styles.meeting}>
@@ -55,6 +59,7 @@ export const MeetingLayout: FC<MeetingLayoutProps> = ({ participants, messages }
           onClose={() => setIsChatOpen(false)}
         />
         <MeetingActions
+          chatId={'fef148cf5ac64a9139ae48cd884f7ce09ca84ae5bc0347d5587815607f2e9ce5'}
           commentsCounter={messages.length}
           isChatOpen={isChatOpen}
           onToggleChat={() => setIsChatOpen(!isChatOpen)}

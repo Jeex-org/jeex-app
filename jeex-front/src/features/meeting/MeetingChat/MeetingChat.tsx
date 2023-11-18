@@ -1,17 +1,17 @@
-"use client";
-import { FC, useCallback, useEffect, useState } from "react";
-import cn from "classnames";
-import { X } from "@phosphor-icons/react";
-import { Avatar, IconButton } from "@radix-ui/themes";
-import { MessageItem } from "@/features/chat/types";
-import styles from "./MeetingChat.module.scss";
+'use client'
+import { FC, useCallback, useEffect, useState } from 'react'
+import cn from 'classnames'
+import { X } from '@phosphor-icons/react'
+import { Avatar, IconButton } from '@radix-ui/themes'
+import { MessageItem } from '@/features/chat/types'
+import styles from './MeetingChat.module.scss'
 
 type MeetingChatProps = {
-  messages: MessageItem[];
-  hasParticipants?: boolean;
-  isOpen?: boolean;
-  onClose: () => void;
-};
+  messages: MessageItem[]
+  hasParticipants?: boolean
+  isOpen?: boolean
+  onClose: () => void
+}
 
 export const MeetingChat: FC<MeetingChatProps> = ({
   messages,
@@ -19,32 +19,32 @@ export const MeetingChat: FC<MeetingChatProps> = ({
   isOpen,
   onClose,
 }) => {
-  const [chatMessages, setChatMessages] = useState<MessageItem[]>([]);
-  const [newMessagesIds, setNewMessagesIds] = useState<number[]>([]);
+  const [chatMessages, setChatMessages] = useState<MessageItem[]>([])
+  const [newMessagesIds, setNewMessagesIds] = useState<string[]>([])
 
   const updateMessages = useCallback(() => {
-    const oldIds = chatMessages.map((message) => message.id);
+    const oldIds = chatMessages.map((message) => message.id)
     messages.forEach((message) => {
       if (!oldIds.includes(message.id)) {
-        setChatMessages((prev) => [...prev, message]);
-        setNewMessagesIds((prev) => [...prev, message.id]);
+        setChatMessages((prev) => [...prev, message])
+        setNewMessagesIds((prev) => [...prev, message.id])
       }
-    });
+    })
     setTimeout(() => {
-      setNewMessagesIds([]);
-    }, 300);
-  }, [chatMessages, messages]);
+      setNewMessagesIds([])
+    }, 300)
+  }, [chatMessages, messages])
 
   useEffect(() => {
-    updateMessages();
-  }, [messages, updateMessages]);
+    updateMessages()
+  }, [messages, updateMessages])
 
   return (
     <div
       className={cn(
         styles.chat,
         { [styles.open]: isOpen },
-        { [styles.hasParticipants]: hasParticipants }
+        { [styles.hasParticipants]: hasParticipants },
       )}
     >
       <ul className={styles.list}>
@@ -83,5 +83,5 @@ export const MeetingChat: FC<MeetingChatProps> = ({
         </IconButton>
       )}
     </div>
-  );
-};
+  )
+}

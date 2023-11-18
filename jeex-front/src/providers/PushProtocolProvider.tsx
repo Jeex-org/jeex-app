@@ -9,6 +9,7 @@ import React, {
   useState,
 } from 'react'
 import { PushAPI, SignerType } from '@pushprotocol/restapi'
+import { ENV } from '@pushprotocol/restapi/src/lib/constants'
 
 export const PushProtocolContext = createContext<{
   user: null | PushAPI
@@ -23,7 +24,9 @@ export const PushProtocolProvider: FC<PropsWithChildren> = ({ children }) => {
   const updateUser = useCallback(async () => {
     const signer = await wallets[0]?.getEthersProvider()
 
-    const user = await PushAPI.initialize(signer.getSigner(wallets[0].address))
+    const user = await PushAPI.initialize(signer.getSigner(wallets[0].address), {
+      env: ENV.STAGING,
+    })
 
     setUser(user)
   }, [wallets])
