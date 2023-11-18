@@ -31,16 +31,8 @@
   gap: var(--space-small);
 }
 
-.newComment {
-  flex: 1;
-}
-
-.allComments {
-  visibility: hidden;
-
-  @include device(desktop) {
-    display: none;
-  }
+.send {
+  flex: 0 0 auto;
 }
 
 .field {
@@ -59,21 +51,4 @@
   @include device(desktop) {
     height: 52px;
   }
-}
-
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-big);
-  margin-inline-end: var(--space-small);
-  visibility: hidden;
-
-  @include device(desktop) {
-    display: none;
-  }
-}
-
-.liked {
-  --meeting-icon-color: var(--color-danger);
 }

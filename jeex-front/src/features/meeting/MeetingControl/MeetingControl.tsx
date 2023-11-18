@@ -1,6 +1,6 @@
-"use client";
-import { FC } from "react";
-import cn from "classnames";
+'use client'
+import { FC } from 'react'
+import cn from 'classnames'
 import {
   CameraRotate,
   ChartBar,
@@ -12,42 +12,44 @@ import {
   ShareFat,
   VideoCamera,
   VideoCameraSlash,
-} from "@phosphor-icons/react";
-import styles from "./MeetingControl.module.scss";
+  PaperPlaneTilt,
+} from '@phosphor-icons/react'
+import styles from './MeetingControl.module.scss'
 
 type MeetingIcon =
-  | "cameraRotate"
-  | "chartBar"
-  | "chatText"
-  | "heart"
-  | "heartFill"
-  | "microphone"
-  | "microphoneSlash"
-  | "shareFat"
-  | "phone"
-  | "videoCamera"
-  | "videoCameraSlash";
+  | 'cameraRotate'
+  | 'chartBar'
+  | 'chatText'
+  | 'heart'
+  | 'heartFill'
+  | 'microphone'
+  | 'microphoneSlash'
+  | 'shareFat'
+  | 'phone'
+  | 'plane'
+  | 'videoCamera'
+  | 'videoCameraSlash'
 
 type MeetingControlProps = {
-  className?: string;
-  icon: MeetingIcon;
-  color?: "white" | "red";
-  isActive?: boolean;
-  text: string;
-  label?: string;
-  type?: "normal" | "compact";
-  disabled?: boolean;
-  onClick: () => void;
-};
+  className?: string
+  icon: MeetingIcon
+  color?: 'white' | 'red'
+  isActive?: boolean
+  text: string
+  label?: string
+  type?: 'normal' | 'compact'
+  disabled?: boolean
+  onClick: () => void
+}
 
 export const MeetingControl: FC<MeetingControlProps> = ({
   className,
   icon,
-  color = "white",
+  color = 'white',
   isActive,
   text,
   label,
-  type = "normal",
+  type = 'normal',
   disabled,
   onClick,
 }) => {
@@ -56,6 +58,7 @@ export const MeetingControl: FC<MeetingControlProps> = ({
     chartBar: <ChartBar weight="fill" />,
     chatText: <ChatText weight="fill" />,
     heart: <Heart weight="regular" />,
+    plane: <PaperPlaneTilt weight="regular" />,
     heartFill: <Heart weight="fill" />,
     microphone: <Microphone weight="fill" />,
     microphoneSlash: <MicrophoneSlash weight="fill" />,
@@ -63,16 +66,16 @@ export const MeetingControl: FC<MeetingControlProps> = ({
     shareFat: <ShareFat weight="fill" />,
     videoCamera: <VideoCamera weight="fill" />,
     videoCameraSlash: <VideoCameraSlash weight="fill" />,
-  };
+  }
 
   return (
     <div
       className={cn(
         styles.container,
         {
-          [styles.compact]: type === "compact",
+          [styles.compact]: type === 'compact',
         },
-        className
+        className,
       )}
     >
       <button
@@ -87,5 +90,5 @@ export const MeetingControl: FC<MeetingControlProps> = ({
       </button>
       <span className={styles.label}>{label}</span>
     </div>
-  );
-};
+  )
+}

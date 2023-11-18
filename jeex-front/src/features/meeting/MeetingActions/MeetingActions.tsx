@@ -1,6 +1,7 @@
 'use client'
 import React, { FC, useCallback, useState } from 'react'
 import cn from 'classnames'
+import { MeetingControl } from '@/features/meeting/MeetingControl/MeetingControl'
 import styles from './MeetingActions.module.scss'
 import { usePushProtocolUser } from '@/hooks/usePushProtocolUser'
 import { Button } from '@radix-ui/themes'
@@ -43,8 +44,15 @@ export const MeetingActions: FC<MeetingActionsProps> = ({ isChatOpen, chatId }) 
             className={styles.field}
             placeholder="Add new comment..."
           />
-          <Button onClick={buttonClickHandler}>Send</Button>
         </div>
+
+        <MeetingControl
+          className={styles.send}
+          text="Comments"
+          icon="plane"
+          type="compact"
+          onClick={buttonClickHandler}
+        />
       </div>
     </div>
   )
