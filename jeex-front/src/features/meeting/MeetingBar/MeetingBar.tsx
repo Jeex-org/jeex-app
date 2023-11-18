@@ -38,8 +38,9 @@ export const MeetingBar: FC<MeetingBarProps> = ({
     room.localParticipant.setCameraEnabled(!!isCamOn)
   }, [isCamOn, room])
 
-  const handleDisconnect = useCallback(async () => {
-    await buttonProps.onClick()
+  const handleDisconnect = useCallback(() => {
+    buttonProps.onClick()
+    console.log('first')
     onClose()
   }, [])
 
@@ -80,7 +81,7 @@ export const MeetingBar: FC<MeetingBarProps> = ({
           text="Leave the meeting"
           icon="phone"
           color="red"
-          disabled={buttonProps.disabled}
+          // disabled={buttonProps.disabled}
           onClick={handleDisconnect}
         />
       </div>

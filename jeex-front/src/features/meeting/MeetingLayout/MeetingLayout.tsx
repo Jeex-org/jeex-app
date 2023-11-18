@@ -1,5 +1,6 @@
 'use client'
 import { FC, useCallback, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { MeetingBar } from '@/features/meeting/MeetingBar/MeetingBar'
 import { MeetingChat } from '@/features/meeting/MeetingChat/MeetingChat'
 import { MeetingParticipants } from '@/features/meeting/MeetingParticipants/MeetingParticipants'
@@ -12,10 +13,10 @@ import styles from './MeetingLayout.module.scss'
 type MeetingLayoutProps = {
   participants: Person[]
   messages: MessageItem[]
-  onClose: () => void
 }
 
-export const MeetingLayout: FC<MeetingLayoutProps> = ({ participants, messages, onClose }) => {
+export const MeetingLayout: FC<MeetingLayoutProps> = ({ participants, messages }) => {
+  const router = useRouter()
   const [isBarVisible, setIsBarVisible] = useState(true)
   const [isMicOn, setIsMicOn] = useState(true)
   const [isCamOn, setIsCamOn] = useState(true)
@@ -29,6 +30,10 @@ export const MeetingLayout: FC<MeetingLayoutProps> = ({ participants, messages, 
     setIsCamOn(!camState)
   }, [])
 
+  const handleClose = useCallback(() => {
+    router.push('.')
+  }, [])
+
   return (
     <div className={styles.meeting}>
       <MeetingLiveKit>
@@ -38,7 +43,7 @@ export const MeetingLayout: FC<MeetingLayoutProps> = ({ participants, messages, 
           isCamOn={isCamOn}
           toggleMic={handleMic}
           toggleCam={handleCam}
-          onClose={onClose}
+          onClose={handleClose}
         />
       </MeetingLiveKit>
 

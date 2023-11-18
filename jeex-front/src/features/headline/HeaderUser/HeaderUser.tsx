@@ -33,7 +33,7 @@ export const HeaderUser: FC<HeaderUserProps> = ({ className }) => {
           <DropdownMenu.Portal>
             <DropdownMenu.Content className={styles.DropdownMenuContent} sideOffset={5}>
               <DropdownMenu.Item onClick={logout} className={styles.DropdownMenuItem}>
-                Log out <div className={styles.RightSlot}>⌘+E</div>
+                Log out
               </DropdownMenu.Item>
 
               <DropdownMenu.Arrow className={styles.DropdownMenuArrow} />
