@@ -36,6 +36,7 @@ type MeetingControlProps = {
   text: string;
   label?: string;
   type?: "normal" | "compact";
+  disabled?: boolean;
   onClick: () => void;
 };
 
@@ -47,6 +48,7 @@ export const MeetingControl: FC<MeetingControlProps> = ({
   text,
   label,
   type = "normal",
+  disabled,
   onClick,
 }) => {
   const icons = {
@@ -74,6 +76,7 @@ export const MeetingControl: FC<MeetingControlProps> = ({
       )}
     >
       <button
+        disabled={disabled}
         title={text}
         className={cn(styles.control, styles[color], {
           [styles.active]: isActive,

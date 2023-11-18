@@ -5,6 +5,7 @@ import { MeetingBar } from "@/features/meeting/MeetingBar/MeetingBar";
 import { MeetingChat } from "@/features/meeting/MeetingChat/MeetingChat";
 import { MeetingParticipants } from "@/features/meeting/MeetingParticipants/MeetingParticipants";
 import { MeetingActions } from "@/features/meeting/MeetingActions/MeetingActions";
+import { MeetingLiveKit } from "../MeetingLiveKit/MeetingLiveKit";
 import { MessageItem } from "@/features/chat/types";
 import { Person } from "@/components/User/User";
 import styles from "./MeetingLayout.module.scss";
@@ -26,7 +27,7 @@ export const MeetingLayout: FC<MeetingLayoutProps> = ({
 }) => {
   const [isBarVisible, setIsBarVisible] = useState(true);
   const [isMicOn, setIsMicOn] = useState(true);
-  const [isCameraOn, setIsCameraOn] = useState(true);
+  const [isCamOn, setIsCamOn] = useState(true);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
 
@@ -35,7 +36,7 @@ export const MeetingLayout: FC<MeetingLayoutProps> = ({
   }, []);
 
   const handleCam = useCallback((camState: boolean) => {
-    setIsCameraOn(!camState);
+    setIsCamOn(!camState);
   }, []);
 
   const handleSubscribe = useCallback(() => {
@@ -44,21 +45,20 @@ export const MeetingLayout: FC<MeetingLayoutProps> = ({
 
   return (
     <div className={styles.meeting}>
-      <MeetingVideoGrid
-        participants={participants}
-        onClick={() => setIsBarVisible(!isBarVisible)}
-      />
-      <MeetingBar
-        isVisible={isBarVisible}
-        isMicOn={isMicOn}
-        isCameraOn={isCameraOn}
-        isSubscribed={isSubscribed}
-        followers={followers}
-        toggleMic={handleMic}
-        toggleCamera={handleCam}
-        onSubscribe={handleSubscribe}
-        onClose={onClose}
-      />
+      <MeetingLiveKit>
+        <MeetingBar
+          isVisible={isBarVisible}
+          isMicOn={isMicOn}
+          isCamOn={isCamOn}
+          isSubscribed={isSubscribed}
+          followers={followers}
+          toggleMic={handleMic}
+          toggleCam={handleCam}
+          onSubscribe={handleSubscribe}
+          onClose={onClose}
+        />
+      </MeetingLiveKit>
+
       <div className={styles.content}>
         <MeetingChat
           messages={messages}
