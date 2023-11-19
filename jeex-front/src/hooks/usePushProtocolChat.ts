@@ -12,7 +12,7 @@ export const usePushProtocolChat = (chatId: string) => {
     console.log(user)
     if (user) {
       user
-        .initStream([CONSTANTS.STREAM.CHAT, CONSTANTS.STREAM.CHAT_OPS], {
+        .initStream([CONSTANTS.STREAM.CHAT], {
           filter: {
             channels: ['*'], // pass in specific channels to only listen to those
             chats: ['*'], // pass in specific chat ids to only listen to those

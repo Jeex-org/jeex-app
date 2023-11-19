@@ -35,10 +35,9 @@ export const MeetingLayout: FC<MeetingLayoutProps> = () => {
   }, [])
 
   const token = new URLSearchParams(window.location.search).get('liveKitToken') as string
+  const chatId = 'bc444c4c14be8e74efe86571cc1d5f8b8fd32e51b0e6a33aa16dec6a9260ec16'
 
-  const messages = usePushProtocolChat(
-    'fef148cf5ac64a9139ae48cd884f7ce09ca84ae5bc0347d5587815607f2e9ce5',
-  )
+  const messages = usePushProtocolChat(chatId)
 
   return (
     <div className={styles.meeting}>
@@ -63,7 +62,7 @@ export const MeetingLayout: FC<MeetingLayoutProps> = () => {
           onClose={() => setIsChatOpen(false)}
         />
         <MeetingActions
-          chatId={'fef148cf5ac64a9139ae48cd884f7ce09ca84ae5bc0347d5587815607f2e9ce5'}
+          chatId={chatId}
           commentsCounter={messages.length}
           isChatOpen={isChatOpen}
           onToggleChat={() => setIsChatOpen(!isChatOpen)}

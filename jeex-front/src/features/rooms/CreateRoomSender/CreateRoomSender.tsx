@@ -26,6 +26,7 @@ export const CreateRoomSender: FC<CreateRoomFormProps> = ({ className, newRoom }
               id: number
               sid: string
               name: string
+              chatId: string
             }
             participant: {
               id: number
@@ -61,7 +62,7 @@ export const CreateRoomSender: FC<CreateRoomFormProps> = ({ className, newRoom }
             <p>
               Room{' '}
               <Link
-                href={`/rooms/${data?.room.id}/?liveKitToken=${data?.participant.token}&sid=${data?.room.sid}`}
+                href={`/rooms/${data?.room.id}/?liveKitToken=${data?.participant.token}&sid=${data?.room.sid}&chatId=${data?.room.chatId}`}
               >
                 <b>{data?.room.name}</b>
               </Link>{' '}
