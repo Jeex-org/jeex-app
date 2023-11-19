@@ -20,6 +20,13 @@ export const MeetingParticipants: FC<MeetingParticipantsProps> = ({ participants
   return (
     <div className={cn(styles.participants)}>
       <ul className={styles.list}>
+        <li className={styles.item}>
+          <div className={styles.video}>
+            <MyVideoConference />
+          </div>
+        </li>
+      </ul>
+      {/* <ul className={styles.list}>
         {participants.map(
           (participant, index) =>
             index < 4 && (
@@ -42,7 +49,7 @@ export const MeetingParticipants: FC<MeetingParticipantsProps> = ({ participants
               </li>
             ),
         )}
-      </ul>
+      </ul> */}
     </div>
   )
 }
