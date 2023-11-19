@@ -1,21 +1,13 @@
-@import "@/styles/_mixins.module";
+@import '@/styles/_mixins.module';
 
 .participants {
   position: absolute;
   inset-block-end: calc(var(--space-small) + 52px);
   inset-inline-end: var(--space-small);
-  mask-image: linear-gradient(
-    180deg,
-    transparent,
-    #000 70%,
-    #000 100%,
-    transparent 100%
-  );
 
   @include device(desktop) {
     inset-block-end: var(--space-small);
-    inset-inline: var(--space-small)
-      calc(var(--meeting-desktop-sidebar) + var(--space-small));
+    inset-inline: var(--space-small) calc(var(--meeting-desktop-sidebar) + var(--space-small));
     mask-image: unset;
   }
 }
@@ -54,6 +46,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+
+  :global {
+    .lk-participant-media-video {
+      width: var(--meeting-participant-size) !important;
+      height: var(--meeting-participant-size) !important;
+      object-fit: cover !important;
+    }
+  }
 }
 
 .mic,

@@ -27,7 +27,9 @@ export const MeetingLiveKit: FC<PropsWithChildren<MeetingLiveKitProps>> = ({ chi
       serverUrl={'wss://meet-cbgsn7fz.livekit.cloud'}
       data-lk-theme="default"
     >
-      <MyVideoConference />
+      <div className={styles.mainVideo}>
+        <MyVideoConference />
+      </div>
       <RoomAudioRenderer />
       {children}
     </LiveKitRoom>
