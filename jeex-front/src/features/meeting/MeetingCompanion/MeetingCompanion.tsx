@@ -3,7 +3,6 @@ import { FC } from 'react'
 import cn from 'classnames'
 
 import { GridLayout, ParticipantTile, useParticipants, useTracks } from '@livekit/components-react'
-import { useParticipant, VideoRenderer } from '@livekit/react-components'
 
 import styles from './MeetingCompanion.module.scss'
 import { Track } from 'livekit-client'
@@ -11,12 +10,6 @@ import { Track } from 'livekit-client'
 type MeetingCompanionProps = {}
 
 export const MeetingCompanion: FC<MeetingCompanionProps> = () => {
-  // const participants = useParticipants()
-  // console.log('🚀 ~ participants:', participants[1])
-  // const participant = useParticipant(participants[1]);
-  // const result = participants[1]?.tracks
-  // console.log('🚀 1', result)
-
   const CompanionVideoConference = () => {
     const tracks = useTracks(
       [
