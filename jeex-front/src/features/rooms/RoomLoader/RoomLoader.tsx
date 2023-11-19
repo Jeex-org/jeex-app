@@ -1,7 +1,7 @@
 'use client'
 import { FC, useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { Room } from 'livekit-client'
 import { Button, IconButton } from '@radix-ui/themes'
 import { Article } from '@/components/Article/Article'
@@ -14,41 +14,30 @@ import styles from './RoomLoader.module.scss'
 type RoomLoaderProps = {}
 
 export const RoomLoader: FC<RoomLoaderProps> = () => {
-  const { room: roomName } = useParams()
-  const userName = 'jeex-user'
+  const { room: roomId } = useParams()
+  const params = new URLSearchParams(window.location.search)
+  const liveKitToken = params.get('liveKitToken')
+  const sid = params.get('sid')
   const [token, setToken] = useState('')
 
   const [roomOnline, setRoomOnline] = useState<Room | null>(null)
 
   const { wsUrl } = environments
 
-  // const connectToRoom = useCallback(
-  //   async (tkn: string) => {
-  //     const room = new Room()
-  //     const result = await room.connect(wsUrl, tkn || token)
-  //     setRoomOnline(room)
-  //   },
-  //   [token, wsUrl],
-  // )
+  // const connectToRoom = useCallback(async () => {
+
+  //   await room.connect(wsUrl, liveKitToken as string)
+
+  //   setRoomOnline(room)
+  // }, [token, wsUrl])
 
   // useEffect(() => {
-  //   ;(async () => {
-  //     try {
-  //       const resp = await fetch(
-  //         `/livekit/api/get-participant-token?room=${roomName}&username=${userName}`,
-  //       )
-  //       const data = await resp.json()
-  //       setToken(data.token)
-  //       connectToRoom(data.token)
-  //     } catch (e) {
-  //       console.error(e)
-  //     }
-  //   })()
-  // }, [connectToRoom, roomName])
+  //   connectToRoom()
+  // }, [connectToRoom])
 
   // TODO: Change return with real data
   return (
-    <Article title={`Room ${roomName}`} backUrl="/rooms" isProtected>
+    <Article title={`Room ${roomId}`} backUrl="/rooms" isProtected>
       <PostMedia isOnline={true} />
       <div className={styles.actions}>
         {/* <div className={styles.cam}>
@@ -58,7 +47,7 @@ export const RoomLoader: FC<RoomLoaderProps> = () => {
         </div> */}
         {/* <div className={styles.mic}>Mic</div> */}
         <div className={styles.call}>
-          <Link href={`./${roomOnline?.name}/call`}>
+          <Link href={`./${roomId}/call?liveKitToken=${liveKitToken}&sid=${sid}`}>
             <Button color="crimson" size="4" className={styles.callButton}>
               Call
             </Button>

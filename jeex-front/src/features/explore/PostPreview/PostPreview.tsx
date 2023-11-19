@@ -1,27 +1,26 @@
 'use client'
 import { FC } from 'react'
-import Link from 'next/link'
 import { UserCircle } from '@phosphor-icons/react'
 import { PostMedia } from '@/features/explore/PostMedia/PostMedia'
 import styles from './PostPreview.module.scss'
 
 type PostPreviewProps = {
   title: string
-  url: string
   cover?: string
   isOnline?: boolean
   usersOnline?: number
+  onClick?: () => void
 }
 
 export const PostPreview: FC<PostPreviewProps> = ({
   title,
-  url,
   cover = '/images/jeex.png',
   isOnline,
   usersOnline = 0,
+  onClick,
 }) => {
   return (
-    <Link href={url} className={styles.post}>
+    <div onClick={onClick} className={styles.post}>
       <PostMedia cover={cover} isOnline={isOnline} />
       <footer className={styles.footer}>
         <div className={styles.info}>
@@ -31,6 +30,6 @@ export const PostPreview: FC<PostPreviewProps> = ({
           <UserCircle weight="bold" /> {usersOnline}
         </div>
       </footer>
-    </Link>
+    </div>
   )
 }

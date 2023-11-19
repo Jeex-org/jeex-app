@@ -34,13 +34,15 @@ export const MeetingLayout: FC<MeetingLayoutProps> = () => {
     router.push('.')
   }, [])
 
+  const token = new URLSearchParams(window.location.search).get('liveKitToken') as string
+
   const messages = usePushProtocolChat(
     'fef148cf5ac64a9139ae48cd884f7ce09ca84ae5bc0347d5587815607f2e9ce5',
   )
 
   return (
     <div className={styles.meeting}>
-      <MeetingLiveKit>
+      <MeetingLiveKit token={token}>
         <MeetingBar
           isVisible={isBarVisible}
           isMicOn={isMicOn}
