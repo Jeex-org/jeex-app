@@ -1,0 +1,9 @@
+
+<- это один раз на машине ->
+doctl auth switch --context mov3r
+doctl registry login
+
+<- это что бы залить ->
+docker build -t jeex-back .
+docker tag jeex-back registry.digitalocean.com/mov3r-container/jeex-back
+docker push registry.digitalocean.com/mov3r-container/jeex-back

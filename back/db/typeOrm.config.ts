@@ -2,7 +2,7 @@ import { ConfigService } from '@nestjs/config'
 import { config } from 'dotenv'
 import { DataSource, DataSourceOptions } from 'typeorm'
 
-import { RoomModel, RoomParticipantModel, UserModel } from '../src/models'
+import { RoomModel, RoomParticipantModel } from '../src/models'
 
 config()
 
@@ -20,7 +20,7 @@ export const dataSourceOptions: DataSourceOptions = {
   url,
   synchronize: true,
   logging: false,
-  entities: [RoomModel, RoomParticipantModel, UserModel],
+  entities: [RoomModel, RoomParticipantModel],
   migrations: [],
   ssl: ca ? { ca } : false,
 }

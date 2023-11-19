@@ -3,6 +3,7 @@ import { ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 
 import { AppModule } from './app.module'
+import { UserStrategyName } from './modules/public/guards'
 
 const PORT = process.env['PORT'] ?? 3000
 
@@ -12,9 +13,22 @@ async function bootstrap() {
   app.enableCors({ origin: '*' })
   app.useGlobalPipes(new ValidationPipe({ transform: true }))
 
-  const config = new DocumentBuilder().setTitle('NFMUSIC AM').setDescription('API documentation for asset manager').setVersion('1.0').build()
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle('JEEX API')
+    .setDescription('API documentation for JEEX')
+    .setVersion('0.1')
+    .addApiKey(
+      {
+        description: `Please enter user jwt token`,
+        name: UserStrategyName,
+        type: 'apiKey',
+        in: 'header',
+      },
+      UserStrategyName,
+    )
+    .build()
 
-  const document = SwaggerModule.createDocument(app, config)
+  const document = SwaggerModule.createDocument(app, swaggerConfig)
 
   SwaggerModule.setup('/doc', app, document)
 

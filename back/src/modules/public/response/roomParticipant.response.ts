@@ -7,12 +7,9 @@ export class IRoomParticipantResponse {
   @ApiProperty({ description: 'Access token user from livekit' })
   token!: string
 
-  @ApiProperty({ description: 'name' })
-  name!: string
-
   @ApiProperty({ description: 'token' })
   roomId!: number
 
   @ApiProperty({ description: 'user_id' })
-  userId!: number
+  userId!: string
 }

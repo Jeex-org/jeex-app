@@ -38,7 +38,7 @@ export class RoomParticipantRepositoryService {
     }
   }
 
-  public async getParticipantsByUserId(userId: number): Promise<RoomParticipantModel[] | null> {
+  public async getParticipantsByUserId(userId: string): Promise<RoomParticipantModel[] | null> {
     try {
       const participants = await this.roomParticipantRepo.find({
         where: { userId },

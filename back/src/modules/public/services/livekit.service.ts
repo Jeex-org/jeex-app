@@ -17,12 +17,12 @@ export class LivekitService {
     private readonly logger: Logger,
     private readonly configService: ConfigService,
   ) {
-    const apiKey = this.configService.get<string>('API_KEY')
-    const apiSecret = this.configService.get<string>('API_SECRET')
-    const websocketUrl = this.configService.get<string>('WEBSOCKET_URL')
+    const apiKey = this.configService.get<string>('LIVEKIT_API_KEY')
+    const apiSecret = this.configService.get<string>('LIVEKIT_API_SECRET')
+    const websocketUrl = this.configService.get<string>('LIVEKIT_WEBSOCKET_URL')
 
     if (!apiKey || !apiSecret || !websocketUrl) {
-      throw new BadRequestException('API_KEY or API_SECRET or WEBSOCKET_URL is not set')
+      throw new Error('Env LIVEKIT_API_KEY or LIVEKIT_API_SECRET or LIVEKIT_WEBSOCKET_URL is not set')
     }
 
     this.apiKey = apiKey
@@ -43,10 +43,10 @@ export class LivekitService {
     }
   }
 
-  public async addGrant(userId: number, roomName: string): Promise<string> {
+  public async addGrant(userId: string, roomName: string): Promise<string> {
     try {
       const accessToken = new AccessToken(this.apiKey, this.apiSecret, {
-        identity: userId.toString(),
+        identity: userId,
       })
 
       accessToken.addGrant({ roomJoin: true, room: roomName })

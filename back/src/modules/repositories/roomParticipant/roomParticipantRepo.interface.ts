@@ -1,5 +1,5 @@
 export interface ICreateParticipantRoomData {
-  userId: number
+  userId: string
   roomId: number
   token: string
 }

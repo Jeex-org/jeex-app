@@ -9,7 +9,10 @@ export class RoomModel {
   @Column({ name: 'sid' })
   sid!: string
 
-  @Column({ name: 'name', unique: true })
+  @Column({ name: 'chat_id' })
+  chatId!: string
+
+  @Column({ name: 'name' })
   name!: string
 
   @OneToMany(() => RoomParticipantModel, (participant) => participant.room)

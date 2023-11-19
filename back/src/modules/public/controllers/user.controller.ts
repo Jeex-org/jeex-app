@@ -1,23 +1,23 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common'
-import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
+import { Body, Controller, Get, Param, Post, Query, UseGuards, Request as DRequest } from '@nestjs/common'
+import { ApiOkResponse, ApiOperation, ApiSecurity, ApiTags } from '@nestjs/swagger'
 
-import { UserService } from '../services'
 import { IUserResponse } from '../response'
 import { ICreateUserRequest } from '../request'
 import { PaginationParamsQuery } from '../queries'
+import { UserGuard, UserStrategyName } from '../guards'
+import { Request } from 'express'
 
 @ApiTags('User')
+@ApiSecurity(UserStrategyName)
+@UseGuards(UserGuard)
 @Controller('/public/user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor() {}
 
-  @Post('/')
+  @Get('/')
   @ApiOperation({ summary: 'Create or get user' })
-  @ApiOkResponse({
-    type: IUserResponse,
-  })
-  async createUser(@Body() createUserRequest: ICreateUserRequest): Promise<IUserResponse> {
-    return this.userService.createUser(createUserRequest)
+  async getUser(@DRequest() req: Request): Promise<string | undefined> {
+    return req.user?.userId
   }
 
   // @ApiOkResponse({

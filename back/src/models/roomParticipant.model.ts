@@ -1,5 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, OneToMany, JoinColumn } from 'typeorm'
-import { UserModel } from './user.model'
 import { RoomModel } from './room.model'
 
 @Entity()
@@ -11,11 +10,7 @@ export class RoomParticipantModel {
   token!: string
 
   @Column({ name: 'user_id' })
-  userId!: number
-
-  @ManyToOne(() => UserModel, (user) => user.roomParticipant)
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
-  user!: UserModel
+  userId!: string
 
   @Column({ name: 'room_id' })
   roomId!: number
