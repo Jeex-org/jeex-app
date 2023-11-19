@@ -2,15 +2,8 @@
 import { FC, PropsWithChildren } from 'react'
 import styles from './MeetingLiveKit.module.scss'
 
-import {
-  LiveKitRoom,
-  VideoConference,
-  GridLayout,
-  ParticipantTile,
-  RoomAudioRenderer,
-  useTracks,
-} from '@livekit/components-react'
-import { Track } from 'livekit-client'
+import { LiveKitRoom, RoomAudioRenderer } from '@livekit/components-react'
+import { MeetingCompanion } from '../MeetingCompanion/MeetingCompanion'
 
 type MeetingLiveKitProps = {
   token: string
@@ -28,25 +21,10 @@ export const MeetingLiveKit: FC<PropsWithChildren<MeetingLiveKitProps>> = ({ chi
       data-lk-theme="default"
     >
       <div className={styles.mainVideo}>
-        <MyVideoConference />
+        <MeetingCompanion />
       </div>
       <RoomAudioRenderer />
       {children}
     </LiveKitRoom>
-  )
-}
-
-function MyVideoConference() {
-  const tracks = useTracks(
-    [
-      { source: Track.Source.Camera, withPlaceholder: true },
-      { source: Track.Source.ScreenShare, withPlaceholder: false },
-    ],
-    { onlySubscribed: false },
-  )
-  return (
-    <GridLayout tracks={tracks}>
-      <ParticipantTile />
-    </GridLayout>
   )
 }
