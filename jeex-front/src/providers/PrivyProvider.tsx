@@ -6,7 +6,6 @@ export const PrivyProvider: FC<PropsWithChildren> = ({ children }) => {
     <LPrivyProvider
       appId="clp4cfxix05acl00f5slgrf2f"
       config={{
-        loginMethods: ['email', 'wallet'],
         appearance: {
           theme: 'light',
           accentColor: '#676FFF',
