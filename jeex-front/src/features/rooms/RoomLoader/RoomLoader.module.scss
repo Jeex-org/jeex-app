@@ -1,0 +1,15 @@
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-base);
+  margin-top: var(--space-base);
+}
+
+.call {
+  flex: 1;
+}
+
+.callButton {
+  width: 100%;
+}

@@ -3,11 +3,13 @@ import { FC, useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { Room } from 'livekit-client'
+import { Button, IconButton } from '@radix-ui/themes'
 import { Article } from '@/components/Article/Article'
 import { environments } from '@/features/livekit/constants'
 import { PostMedia } from '@/features/explore/PostMedia/PostMedia'
 import { RoomConnector } from '@/features/rooms/RoomConnector/RoomConnector'
 import { Loader } from '@/components/Loader/Loader'
+import styles from './RoomLoader.module.scss'
 
 type RoomLoaderProps = {}
 
@@ -48,8 +50,21 @@ export const RoomLoader: FC<RoomLoaderProps> = () => {
   return (
     <Article title={`Room ${roomName}`} backUrl="/rooms" isProtected>
       <PostMedia isOnline={true} />
-      <Link href={`./${roomOnline?.name}/call`}>Call</Link>{' '}
-      <Link href={`./${roomOnline?.name}/edit`}>Edit</Link>
+      <div className={styles.actions}>
+        {/* <div className={styles.cam}>
+          <IconButton size="4" color="orange" variant="soft">
+            <PencilSimple width="18" height="18" />
+          </IconButton>
+        </div> */}
+        {/* <div className={styles.mic}>Mic</div> */}
+        <div className={styles.call}>
+          <Link href={`./${roomOnline?.name}/call`}>
+            <Button color="crimson" size="4" className={styles.callButton}>
+              Call
+            </Button>
+          </Link>
+        </div>
+      </div>
     </Article>
   )
 
