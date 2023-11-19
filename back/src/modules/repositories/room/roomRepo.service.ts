@@ -21,6 +21,7 @@ export class RoomRepositoryService {
       const room = this.roomRepo.save({
         name: createData.name,
         sid: createData.sid,
+        chatId: createData.chatId,
       })
       return room
     } catch (err: any) {

@@ -38,7 +38,8 @@ export class EvmService {
 
       // Проверка, есть ли у пользователя NFT
       const hasNFT = balance.gt(0)
-      return true
+
+      return hasNFT ? true : false
     } catch (err: any) {
       console.log(`Error calling balanceOf: ${err}`)
       return false

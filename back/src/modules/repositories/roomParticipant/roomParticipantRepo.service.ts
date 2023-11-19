@@ -50,4 +50,18 @@ export class RoomParticipantRepositoryService {
       return null
     }
   }
+
+  public async getParticipantByUserIdAndRoomId(userId: string, roomId: number): Promise<RoomParticipantModel | null> {
+    try {
+      const participant = await this.roomParticipantRepo.findOne({
+        where: { userId, roomId },
+        relations: ['room'],
+      })
+
+      return participant
+    } catch (err: any) {
+      this.logger.error(`Error when retrieving participant by user ID and room ID: ${err.message}`)
+      return null
+    }
+  }
 }

@@ -132,11 +132,34 @@ export class RoomService {
       throw new BadRequestException('Error when getting user from privy')
     }
 
-    const hasNFT = await this.evmService.hasNft(user.wallet!.address)
+    const participantExist = await this.roomParticipantRepo.getParticipantByUserIdAndRoomId(userId, joinRoomRequest.roomId)
 
-    if (!hasNFT) {
-      throw new BadRequestException('User has no NFT')
+    if (participantExist) {
+      return {
+        room: {
+          id: participantExist.room.id,
+          sid: participantExist.room.sid,
+          name: participantExist.room.name,
+          chatId: participantExist.room.chatId,
+        },
+        participant: {
+          id: participantExist.id,
+          token: participantExist.token,
+          roomId: participantExist.roomId,
+          userId: participantExist.userId,
+        },
+      }
     }
+
+    console.log('user.wallet!.address', user.wallet!.address)
+
+    // const hasNFT = await this.evmService.hasNft(user.wallet!.address)
+
+    // console.log('hasNFT', hasNFT)
+
+    // if (!hasNFT) {
+    //   throw new BadRequestException('User has no NFT')
+    // }
 
     const room = await this.roomRepo.getRoomById(joinRoomRequest.roomId)
 
