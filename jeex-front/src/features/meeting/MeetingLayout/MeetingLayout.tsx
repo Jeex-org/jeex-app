@@ -31,7 +31,7 @@ export const MeetingLayout: FC<MeetingLayoutProps> = () => {
   }, [])
 
   const handleClose = useCallback(() => {
-    router.push('.')
+    router.push('/')
   }, [])
 
   const token = new URLSearchParams(window.location.search).get('liveKitToken') as string

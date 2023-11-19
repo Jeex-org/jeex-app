@@ -43,7 +43,6 @@ export const MeetingBar: FC<MeetingBarProps> = ({
 
   const handleDisconnect = useCallback(() => {
     buttonProps.onClick()
-    console.log('first')
     onClose()
   }, [])
 
