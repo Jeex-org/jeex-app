@@ -29,7 +29,7 @@ export const RoomsListLoader: FC<RoomsListLoaderProps> = () => {
       return await axios
         .get(`https://jeex-back-dgn2x.ondigitalocean.app/public/room`, {
           headers: {
-            Authorization: await getAccessToken(),
+            Authorization: (await getAccessToken()) as string,
           },
         })
         .then((response) => response.data)
@@ -61,7 +61,7 @@ export const RoomsListLoader: FC<RoomsListLoaderProps> = () => {
           },
           {
             headers: {
-              Authorization: await getAccessToken(),
+              Authorization: (await getAccessToken()) as string,
             },
           },
         )

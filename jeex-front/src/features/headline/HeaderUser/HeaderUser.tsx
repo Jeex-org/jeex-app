@@ -14,11 +14,7 @@ export const HeaderUser: FC<HeaderUserProps> = ({ className }) => {
   const { user, connectWallet, login, logout, getAccessToken } = usePrivy()
 
   const isLoggedIn = useMemo(() => user?.wallet?.address, [user?.wallet?.address])
-  useEffect(() => {
-    if (user?.wallet) {
-      getAccessToken().then((res) => console.log(res))
-    }
-  }, [user])
+
   return (
     <DropdownMenu.Root>
       {!isLoggedIn ? (

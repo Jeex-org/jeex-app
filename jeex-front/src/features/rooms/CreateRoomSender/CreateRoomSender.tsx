@@ -41,7 +41,7 @@ export const CreateRoomSender: FC<CreateRoomFormProps> = ({ className, newRoom }
           },
           {
             headers: {
-              Authorization: await getAccessToken(),
+              Authorization: (await getAccessToken()) as string,
             },
           },
         )
