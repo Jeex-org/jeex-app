@@ -3,7 +3,7 @@ import { FC, useCallback, useEffect } from 'react'
 import cn from 'classnames'
 import { usePrivy } from '@privy-io/react-auth'
 
-import { useDisconnectButton, useRoomContext, useParticipants } from '@livekit/components-react'
+import { useDisconnectButton, useRoomContext } from '@livekit/components-react'
 
 import { buildAvatar, shortenAddress } from '@/utils/common'
 import { MeetingAuthor } from '@/features/meeting/MeetingAuthor/MeetingAuthor'
@@ -27,8 +27,6 @@ export const MeetingBar: FC<MeetingBarProps> = ({
   toggleCam,
   onClose,
 }) => {
-  const participants = useParticipants()
-  console.log('🚀 ~ participants:', participants[1])
   const { user } = usePrivy()
   const { buttonProps } = useDisconnectButton({ stopTracks: true })
   const room = useRoomContext()
