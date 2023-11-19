@@ -61,7 +61,7 @@ export const CreateRoomSender: FC<CreateRoomFormProps> = ({ className, newRoom }
             <p>
               Room{' '}
               <Link
-                href={`/rooms/${data?.room.id}?liveKitToken=${data?.participant.token}&sid=${data?.room.sid}`}
+                href={`/rooms/${data?.room.id}/?liveKitToken=${data?.participant.token}&sid=${data?.room.sid}`}
               >
                 <b>{data?.room.name}</b>
               </Link>{' '}
