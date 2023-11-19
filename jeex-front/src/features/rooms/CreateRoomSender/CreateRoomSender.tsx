@@ -1,26 +1,53 @@
-"use client";
-import { FC } from "react";
-import cn from "classnames";
-import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
-import { NewRoom } from "../types";
+'use client'
+import { FC } from 'react'
+import cn from 'classnames'
+import { useQuery } from '@tanstack/react-query'
+import Link from 'next/link'
+import { NewRoom } from '../types'
+import axios, { AxiosResponse } from 'axios'
+import { usePrivy } from '@privy-io/react-auth'
 
 type CreateRoomFormProps = {
-  className?: string;
-  newRoom: NewRoom;
-};
+  className?: string
+  newRoom: NewRoom
+}
 
-export const CreateRoomSender: FC<CreateRoomFormProps> = ({
-  className,
-  newRoom,
-}) => {
+export const CreateRoomSender: FC<CreateRoomFormProps> = ({ className, newRoom }) => {
+  const { getAccessToken } = usePrivy()
+
   const { isLoading, error, data } = useQuery({
-    queryKey: ["activeRoomsList"],
-    queryFn: () =>
-      fetch(
-        `/livekit/api/create-room?name=${newRoom.name}&empty-timeout=${newRoom.emptyTimeout}&max-participants=${newRoom.maxParticipants}`
-      ).then((res) => res.json()),
-  });
+    queryKey: ['createRoomQuery'],
+    queryFn: async () => {
+      return await axios
+        .post<
+          never,
+          AxiosResponse<{
+            room: {
+              id: number
+              sid: string
+              name: string
+            }
+            participant: {
+              id: number
+              roomId: number
+              token: string
+              userId: string
+            }
+          }>
+        >(
+          `https://jeex-back-dgn2x.ondigitalocean.app/public/room`,
+          {
+            name: newRoom.name,
+          },
+          {
+            headers: {
+              Authorization: await getAccessToken(),
+            },
+          },
+        )
+        .then((response) => response.data)
+    },
+  })
 
   return (
     <div className={cn(className)}>
@@ -32,15 +59,17 @@ export const CreateRoomSender: FC<CreateRoomFormProps> = ({
             <p>Something went wrong :(</p>
           ) : (
             <p>
-              Room{" "}
-              <Link href={`/rooms/${data.name}`}>
-                <b>{data.name}</b>
-              </Link>{" "}
+              Room{' '}
+              <Link
+                href={`/rooms/${data?.room.id}?liveKitToken=${data?.participant.token}&sid=${data?.room.sid}`}
+              >
+                <b>{data?.room.name}</b>
+              </Link>{' '}
               is created!
             </p>
           )}
         </div>
       )}
     </div>
-  );
-};
+  )
+}

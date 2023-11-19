@@ -24,7 +24,7 @@ dependencies:
     version: 0.5.3(ethers@5.7.2)
   '@pushprotocol/uiweb':
     specifier: ^1.1.19
-    version: 1.1.19(@pushprotocol/restapi@1.4.38)(@pushprotocol/socket@0.5.3)(@types/react-dom@18.2.14)(@types/react@18.2.33)(axios@0.27.2)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.1)
+    version: 1.1.19(@pushprotocol/restapi@1.4.38)(@pushprotocol/socket@0.5.3)(@types/react-dom@18.2.14)(@types/react@18.2.33)(axios@1.6.2)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.1)
   '@radix-ui/react-dropdown-menu':
     specifier: ^2.0.6
     version: 2.0.6(@types/react-dom@18.2.14)(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)
@@ -40,6 +40,9 @@ dependencies:
   '@tanstack/react-query':
     specifier: ^5.4.3
     version: 5.4.3(react-dom@18.2.0)(react@18.2.0)
+  axios:
+    specifier: ^1.6.2
+    version: 1.6.2
   classnames:
     specifier: ^2.3.2
     version: 2.3.2
@@ -2201,7 +2204,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@pushprotocol/uiweb@1.1.19(@pushprotocol/restapi@1.4.38)(@pushprotocol/socket@0.5.3)(@types/react-dom@18.2.14)(@types/react@18.2.33)(axios@0.27.2)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.1):
+  /@pushprotocol/uiweb@1.1.19(@pushprotocol/restapi@1.4.38)(@pushprotocol/socket@0.5.3)(@types/react-dom@18.2.14)(@types/react@18.2.33)(axios@1.6.2)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.1):
     resolution: {integrity: sha512-wujZNtAMgQsvYYz1vmA2z5MYQVK8q3c/18oUHGayr/172kIqVM+89Vfeg+bKo1gYAPDpbyy5iCCE1qACdwOvNA==}
     peerDependencies:
       '@pushprotocol/restapi': ^1.2.15
@@ -2222,7 +2225,7 @@ packages:
       '@web3-onboard/react': 2.8.13(react@18.2.0)
       '@web3-onboard/walletconnect': 2.5.0(@types/react@18.2.33)(react@18.2.0)
       '@web3-react/injected-connector': 6.0.7
-      axios: 0.27.2
+      axios: 1.6.2
       date-fns: 2.30.0
       emoji-picker-react: 4.5.15(react@18.2.0)
       ethers: 5.7.2
@@ -4756,8 +4759,8 @@ packages:
       - debug
     dev: false
 
-  /axios@1.6.0:
-    resolution: {integrity: sha512-EZ1DYihju9pwVB+jg67ogm+Tmqc6JmhamRN6I4Zt8DfZu5lbcQGw3ozH9lFejSJgs/ibaef3A9PMXPLeefFGJg==}
+  /axios@1.6.2:
+    resolution: {integrity: sha512-7i24Ri4pmDRfJTR7LDBhsOTtcm+9kjX5WiY1X3wIisx6G9So3pfMkEiU7emUBe46oceVImccTEM3k6C5dbVW8A==}
     dependencies:
       follow-redirects: 1.15.3
       form-data: 4.0.0
@@ -7444,7 +7447,7 @@ packages:
   /livekit-server-sdk@1.2.7:
     resolution: {integrity: sha512-tOhRb0vz1wBzMpTkP4ixptlC9MFME24PvG8Z/R7vBbQ1VGd6EdNr56voBSr+RCalYxaQqx0E9Gg4l+57m/Nlmw==}
     dependencies:
-      axios: 1.6.0
+      axios: 1.6.2
       camelcase-keys: 7.0.2
       jsonwebtoken: 9.0.2
       long: 5.2.3

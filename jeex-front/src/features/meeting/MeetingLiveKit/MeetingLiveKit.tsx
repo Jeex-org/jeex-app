@@ -12,17 +12,17 @@ import {
 } from '@livekit/components-react'
 import { Track } from 'livekit-client'
 
-type MeetingLiveKitProps = {}
+type MeetingLiveKitProps = {
+  token: string
+}
 
-export const MeetingLiveKit: FC<PropsWithChildren<MeetingLiveKitProps>> = ({ children }) => {
+export const MeetingLiveKit: FC<PropsWithChildren<MeetingLiveKitProps>> = ({ children, token }) => {
   return (
     <LiveKitRoom
       className={styles.kit}
       video={true}
       audio={true}
-      token={
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6IjEyMzQifSwiaWF0IjoxNzAwMzM4NDU0LCJuYmYiOjE3MDAzMzg0NTQsImV4cCI6MTcwMDM2MDA1NCwiaXNzIjoiQVBJRUZyWXUyaHFKckFEIiwic3ViIjoiNCIsImp0aSI6IjQifQ.UauLMy4bSvVm2lf3woeyaeRcwZ8CgAA3rZaFn7g-hVQ'
-      }
+      token={token}
       connectOptions={{ autoSubscribe: false }}
       serverUrl={'wss://meet-cbgsn7fz.livekit.cloud'}
       data-lk-theme="default"
