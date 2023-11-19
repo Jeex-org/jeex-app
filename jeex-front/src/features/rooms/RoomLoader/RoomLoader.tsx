@@ -18,6 +18,8 @@ export const RoomLoader: FC<RoomLoaderProps> = () => {
   const params = new URLSearchParams(window.location.search)
   const liveKitToken = params.get('liveKitToken')
   const sid = params.get('sid')
+  const chatId = params.get('chatId')
+
   const [token, setToken] = useState('')
 
   const [roomOnline, setRoomOnline] = useState<Room | null>(null)
@@ -47,7 +49,7 @@ export const RoomLoader: FC<RoomLoaderProps> = () => {
         </div> */}
         {/* <div className={styles.mic}>Mic</div> */}
         <div className={styles.call}>
-          <Link href={`./${roomId}/call?liveKitToken=${liveKitToken}&sid=${sid}`}>
+          <Link href={`./${roomId}/call/?liveKitToken=${liveKitToken}&sid=${sid}&chatId=${chatId}`}>
             <Button color="crimson" size="4" className={styles.callButton}>
               Call
             </Button>
