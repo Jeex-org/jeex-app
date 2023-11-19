@@ -3,8 +3,6 @@ import { FC } from 'react'
 import cn from 'classnames'
 import { Track } from 'livekit-client'
 import { GridLayout, ParticipantTile, useTracks } from '@livekit/components-react'
-import { Crown, MicrophoneSlash } from '@phosphor-icons/react'
-import { Avatar } from '@radix-ui/themes'
 import { Person } from '@/components/User/User'
 import styles from './MeetingParticipants.module.scss'
 
@@ -26,30 +24,6 @@ export const MeetingParticipants: FC<MeetingParticipantsProps> = ({ participants
           </div>
         </li>
       </ul>
-      {/* <ul className={styles.list}>
-        {participants.map(
-          (participant, index) =>
-            index < 4 && (
-              <li className={styles.item} key={index}>
-                {index !== 0 ? (
-                  // If camera off
-                  <Avatar
-                    size="6"
-                    src={participant.photoUrl}
-                    fallback="AT"
-                    radius="none"
-                    className={styles.avatar}
-                  />
-                ) : (
-                  // If camera on
-                  <div className={styles.video}>
-                    <MyVideoConference />
-                  </div>
-                )}
-              </li>
-            ),
-        )}
-      </ul> */}
     </div>
   )
 }
