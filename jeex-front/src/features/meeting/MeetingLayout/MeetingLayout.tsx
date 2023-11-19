@@ -8,8 +8,10 @@ import { MeetingActions } from '@/features/meeting/MeetingActions/MeetingActions
 import { MeetingLiveKit } from '../MeetingLiveKit/MeetingLiveKit'
 import { MessageItem } from '@/features/chat/types'
 import { Person } from '@/components/User/User'
-import styles from './MeetingLayout.module.scss'
 import { usePushProtocolChat } from '@/hooks/usePushProtocolChat'
+import styles from './MeetingLayout.module.scss'
+
+import participants from '@/mocks/participants.json'
 
 type MeetingLayoutProps = {}
 
@@ -49,6 +51,8 @@ export const MeetingLayout: FC<MeetingLayoutProps> = () => {
           toggleCam={handleCam}
           onClose={handleClose}
         />
+
+        {participants.length > 1 && <MeetingParticipants participants={participants} />}
       </MeetingLiveKit>
 
       <div className={styles.content}>
@@ -65,7 +69,6 @@ export const MeetingLayout: FC<MeetingLayoutProps> = () => {
           onToggleChat={() => setIsChatOpen(!isChatOpen)}
         />
       </div>
-      {[].length > 1 && <MeetingParticipants participants={[]} />}
     </div>
   )
 }
