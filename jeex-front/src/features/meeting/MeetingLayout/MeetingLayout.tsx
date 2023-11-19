@@ -31,11 +31,11 @@ export const MeetingLayout: FC<MeetingLayoutProps> = () => {
   }, [])
 
   const handleClose = useCallback(() => {
-    router.push('/')
+    router.push('.')
   }, [])
 
   const token = new URLSearchParams(window.location.search).get('liveKitToken') as string
-  const chatId = 'bc444c4c14be8e74efe86571cc1d5f8b8fd32e51b0e6a33aa16dec6a9260ec16'
+  const chatId = new URLSearchParams(window.location.search).get('chatId') as string
 
   const messages = usePushProtocolChat(chatId)
 
