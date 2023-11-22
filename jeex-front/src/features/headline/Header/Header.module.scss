@@ -1,8 +1,6 @@
-@import "@/styles/_mixins.module";
+@import '@/styles/_mixins.module';
 
 .header {
-  position: relative;
-  z-index: 100;
   min-width: var(--device-min-size);
   background: var(--color-background);
   box-shadow: 0 0 0 1px var(--color-border);
